@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blob API Reference</title>
+    <link
+      rel="shortcut icon"
+      href="./images/favicon-32x32.png"
+      type="image/png"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f9fafb;
+        padding: 2rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: white;
+        margin-bottom: 2rem;
+      }
+
+      thead {
+        background-color: #059669;
+        color: white;
+      }
+
+      th,
+      td {
+        padding: 1rem;
+        text-align: left;
+        font-size: 0.95rem;
+      }
+
+      th {
+        font-weight: 600;
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: #f3f4f6;
+      }
+
+      tbody tr:hover {
+        background-color: #d1fae5;
+        transition: background-color 0.3s ease;
+      }
+
+      td {
+        vertical-align: top;
+      }
+
+      @media (max-width: 768px) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+          display: block;
+        }
+
+        thead tr {
+          display: none;
+        }
+
+        td {
+          padding: 0.75rem;
+          border-bottom: 1px solid #ddd;
+        }
+
+        td::before {
+          content: attr(data-label);
+          font-weight: bold;
+          color: #059669;
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      pre {
+        background-color: #1e293b;
+        color: #f8fafc;
+        padding: 1rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        font-size: 0.9rem;
+      }
+
+      h2,
+      h3 {
+        color: #047857;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>📦 Blob API Reference</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>🧩 Feature</th>
+          <th>🔧 Type</th>
+          <th>⚙️ Method / Property</th>
+          <th>🎯 Description</th>
+          <th>🎯 Values / Params</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🏗 Constructor</td>
+          <td>Class</td>
+          <td>new Blob(parts, options)</td>
+          <td>Creates a Blob object</td>
+          <td>
+            <code>parts: Array&lt;string&gt;, options?: BlobPropertyBag</code>
+          </td>
+        </tr>
+        <tr>
+          <td>📏 Size</td>
+          <td>Property</td>
+          <td>.size</td>
+          <td>Size in bytes</td>
+          <td>Read-only</td>
+        </tr>
+        <tr>
+          <td>🧾 Type</td>
+          <td>Property</td>
+          <td>.type</td>
+          <td>MIME type of the blob</td>
+          <td>Read-only (e.g. image/png, text/html)</td>
+        </tr>
+        <tr>
+          <td>📤 Convert</td>
+          <td>Method</td>
+          <td>.slice(start, end, type)</td>
+          <td>Creates new blob slice</td>
+          <td>Optional start, end, and type</td>
+        </tr>
+        <tr>
+          <td>🔄 Convert to URL</td>
+          <td>Method</td>
+          <td>URL.createObjectURL(blob)</td>
+          <td>Creates temporary URL for Blob</td>
+          <td>Used to preview images</td>
+        </tr>
+        <tr>
+          <td>🧽 Revoke URL</td>
+          <td>Method</td>
+          <td>URL.revokeObjectURL(url)</td>
+          <td>Frees up memory</td>
+          <td>Pass the blob URL</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🧪 Code Examples for Each Blob Feature</h3>
+
+    <pre><code>🏗 Constructor
+const blob = new Blob(["Hello, Blob!"], { type: "text/plain" });
+
+📏 Size
+console.log("Blob size:", blob.size); // Output in bytes
+
+🧾 Type
+console.log("Blob type:", blob.type); // "text/plain"
+
+📤 Convert - Slice
+const slice = blob.slice(0, 5);
+slice.text().then(text => console.log("Sliced text:", text)); // "Hello"
+
+🔄 Convert to URL
+const url = URL.createObjectURL(blob);
+console.log("Blob URL:", url);
+
+Optional: preview the blob content
+const link = document.createElement("a");
+link.href = url;
+link.download = "example.txt";
+link.textContent = "Download Blob";
+document.body.appendChild(link);
+
+🧽 Revoke URL (after some time)
+setTimeout(() => {
+  URL.revokeObjectURL(url);
+  console.log("Blob URL revoked");
+}, 5000);
+</code></pre>
+  </body>
+</html>

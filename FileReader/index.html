@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FileReader API Reference</title>
+    <link rel="shortcut icon" href="./images/fileReader.png" type="image/png" />
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f9fafb;
+        padding: 2rem;
+        line-height: 1.6;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: white;
+        margin-bottom: 2rem;
+      }
+
+      thead {
+        background-color: #2563eb;
+        color: white;
+      }
+
+      th,
+      td {
+        padding: 1rem;
+        text-align: left;
+        font-size: 0.95rem;
+      }
+
+      th {
+        font-weight: 600;
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: #f3f4f6;
+      }
+
+      tbody tr:hover {
+        background-color: #dbeafe;
+        transition: background-color 0.3s ease;
+      }
+
+      td {
+        vertical-align: top;
+      }
+
+      @media (max-width: 768px) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+          display: block;
+        }
+
+        thead tr {
+          display: none;
+        }
+
+        td {
+          padding: 0.75rem;
+          border-bottom: 1px solid #ddd;
+        }
+
+        td::before {
+          content: attr(data-label);
+          font-weight: bold;
+          color: #2563eb;
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      pre {
+        background-color: #1e293b;
+        color: #f8fafc;
+        padding: 1rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        font-size: 0.9rem;
+        margin-top: 1rem;
+      }
+
+      code {
+        font-family: "Courier New", Courier, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>📁 FileReader API Reference</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>🧩 Feature</th>
+          <th>🔧 Type</th>
+          <th>⚙️ Method / Property</th>
+          <th>🎯 Description</th>
+          <th>🎯 Values / Params</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🏗 Constructor</td>
+          <td>Class</td>
+          <td>new FileReader()</td>
+          <td>Initializes reader</td>
+          <td>Used with &lt;input type="file"&gt;</td>
+        </tr>
+        <tr>
+          <td>🧠 Read as Text</td>
+          <td>Method</td>
+          <td>.readAsText(file)</td>
+          <td>Reads file and returns text</td>
+          <td><code>file: Blob</code></td>
+        </tr>
+        <tr>
+          <td>🎨 Read as Data URL</td>
+          <td>Method</td>
+          <td>.readAsDataURL(file)</td>
+          <td>Returns Base64 encoded data URL</td>
+          <td>Useful for image previews</td>
+        </tr>
+        <tr>
+          <td>🧊 Read as ArrayBuffer</td>
+          <td>Method</td>
+          <td>.readAsArrayBuffer(file)</td>
+          <td>Reads file as binary buffer</td>
+          <td>Used in WebSockets or encryption</td>
+        </tr>
+        <tr>
+          <td>🧵 Read as Binary</td>
+          <td>Method</td>
+          <td>.readAsBinaryString(file)</td>
+          <td>(Deprecated) Binary string</td>
+          <td>Avoid in modern apps</td>
+        </tr>
+        <tr>
+          <td>📍 onload</td>
+          <td>Event</td>
+          <td>reader.onload</td>
+          <td>Triggered when reading is done</td>
+          <td>Access <code>reader.result</code> in callback</td>
+        </tr>
+        <tr>
+          <td>❌ onerror</td>
+          <td>Event</td>
+          <td>reader.onerror</td>
+          <td>Triggered when reading fails</td>
+          <td>Used for error handling</td>
+        </tr>
+        <tr>
+          <td>🛑 abort</td>
+          <td>Method</td>
+          <td>.abort()</td>
+          <td>Cancels reading</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>📊 Progress</td>
+          <td>Event</td>
+          <td>reader.onprogress</td>
+          <td>Monitors progress</td>
+          <td><code>e.loaded</code>, <code>e.total</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔍 Example: Preview Text from Uploaded File</h3>
+
+    <input type="file" id="fileInput" />
+    <pre id="output">Select a text file to preview...</pre>
+
+    <script>
+      const input = document.getElementById("fileInput");
+      const output = document.getElementById("output");
+
+      input.addEventListener("change", () => {
+        const file = input.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          output.textContent = e.target.result;
+        };
+
+        reader.onerror = function () {
+          output.textContent = "❌ Failed to read file";
+        };
+
+        reader.readAsText(file);
+      });
+    </script>
+  </body>
+</html>

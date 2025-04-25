@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="FormData API Reference" />
+    <meta
+      name="keywords"
+      content="FormData, API, JavaScript, Web Development"
+    />
+    <meta name="author" content="Kaushik" />
+    <link rel="shortcut icon" href="./images/file.png" type="image/png" />
+    <title>FormData</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f9fafb;
+        padding: 2rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: white;
+      }
+
+      thead {
+        background-color: #4f46e5;
+        color: white;
+      }
+
+      th,
+      td {
+        padding: 1rem;
+        text-align: left;
+        font-size: 0.95rem;
+      }
+
+      th {
+        font-weight: 600;
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: #f3f4f6;
+      }
+
+      tbody tr:hover {
+        background-color: #e0e7ff;
+        transition: background-color 0.3s ease;
+      }
+
+      td {
+        vertical-align: top;
+      }
+
+      @media (max-width: 768px) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+          display: block;
+        }
+
+        thead tr {
+          display: none;
+        }
+
+        td {
+          padding: 0.75rem;
+          border-bottom: 1px solid #ddd;
+        }
+
+        td::before {
+          content: attr(data-label);
+          font-weight: bold;
+          color: #4f46e5;
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      let formData = new FormData();
+      // Add Data
+      formData.append("name", "John Doe");
+      formData.append("age", 30);
+
+      //TODO: Set Data
+      formData.set("age", 31); // Updates the age to 31
+
+      //TODO: Get Data
+      // let name = formData.get('name'); // 'John Doe'
+      formData.get("name"); // 'John Doe' or 'No Name' if not found
+
+      //TODO: Check if a key exists
+      let hasAge = formData.has("age"); // true
+
+      //TODO: Delete Data
+      formData.delete("name"); // Removes the 'name' key
+
+      //TODO: Iterate over FormData
+      // for (let [key, value] of formData.entries()) {
+      //     console.log(key, value);
+      // }
+
+      //TODO: Convert FormData to JSON
+      let json = JSON.stringify(formData);
+
+      // Keys
+      let keys = Array.from(formData.keys()); // ['age']
+
+      // Values
+      let values = Array.from(formData.values()); // [31]
+
+      console.log("Name:", name ? name : "No Name");
+      console.log("Has Age:", hasAge);
+      console.log("Keys:", keys);
+      console.log("Values:", values);
+
+      console.log("FormData:", formData);
+    </script>
+
+    <table>
+      <thead>
+        <tr>
+          <th>🧩 Feature</th>
+          <th>🔧 Type</th>
+          <th>⚙️ Method / Property</th>
+          <th>📝 Description</th>
+          <th>🎯 Values / Params</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🏗 Constructor</td>
+          <td>Class</td>
+          <td>new FormData()</td>
+          <td>Creates an empty FormData object</td>
+          <td>form?: HTMLFormElement</td>
+        </tr>
+        <tr>
+          <td>➕ Add Data</td>
+          <td>Method</td>
+          <td>.append(key, value)</td>
+          <td>Adds a field to the form</td>
+          <td>key: string, value: string</td>
+        </tr>
+        <tr>
+          <td>📝 Set Data</td>
+          <td>Method</td>
+          <td>.set(key, value)</td>
+          <td>Sets or replaces a value</td>
+          <td>Same as .append()</td>
+        </tr>
+        <tr>
+          <td>❌ Delete Field</td>
+          <td>Method</td>
+          <td>.delete(key)</td>
+          <td>Removes a key and its value</td>
+          <td>key: string</td>
+        </tr>
+        <tr>
+          <td>🔍 Check Field</td>
+          <td>Method</td>
+          <td>.has(key)</td>
+          <td>Checks if key exists</td>
+          <td>key: string → returns boolean</td>
+        </tr>
+        <tr>
+          <td>🔁 Iterate</td>
+          <td>Method</td>
+          <td>.entries()</td>
+          <td>Returns iterator of [key, value] pairs</td>
+          <td>for...of compatible</td>
+        </tr>
+        <tr>
+          <td>🔁 Keys</td>
+          <td>Method</td>
+          <td>.keys()</td>
+          <td>Returns iterator of all keys</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>🔁 Values</td>
+          <td>Method</td>
+          <td>.values()</td>
+          <td>Returns iterator of all values</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>🔄 Submit</td>
+          <td>Usage</td>
+          <td>fetch(url, { method: "POST", body: formData })</td>
+          <td>Sends to backend</td>
+          <td>Used in file uploads, forms, etc.</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
